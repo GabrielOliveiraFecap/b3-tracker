@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<main>
-
+<main class = "container">
+    <header class="cabecalho">{{ titulo }}</header>
+    
     <body>
-        <h1>{{ titulo }}</h1>
-        <h3>Painel de acompanhamento de ações da B3.</h3>
+        <h3 class = "painel">Painel de acompanhamento de ações da B3.</h3>
 
         <div class="grid-acoes">
             <article class="card">
