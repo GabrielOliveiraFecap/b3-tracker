@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-'''token = os.getenv("TOKEN")
+token = os.getenv("TOKEN")
 response = requests.get(
     "https://brapi.dev/api/v2/stocks/quote",
     headers={"Authorization": f"Bearer {token}"},
@@ -19,7 +19,7 @@ for item in data["results"]:
 
 
 
-urlBase = "https://brapi.dev/api/v2/stocks/quote?symbols=PETR4,VALE3,ITUB4,MGLU3"
+'''urlBase = "https://brapi.dev/api/v2/stocks/quote?symbols=PETR4,VALE3,ITUB4,MGLU3"
 parametros = {
     headers={"Authorization": f"Bearer {token}"}
 }
@@ -31,7 +31,23 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-   return render_template("index.html", titulo="B3 Tracker")
+    response = requests.get(
+        "https://brapi.dev/api/v2/stocks/quote",
+        headers={"Authorization": f"Bearer {token}"},
+        params={"symbols": "PETR4,VALE3,MGLU3,ITUB4"},
+    )
+    response.raise_for_status()
+    data = response.json()
 
+    acoes = []
+    for item in data["results"]:
+        quote = item["data"]
+        acoes.append({
+            "ticker": item["symbol"],
+            "preco": quote["regularMarketPrice"],
+            "variacao": quote["regularMarketChangePercent"],
+        })
+
+    return render_template("index.html", titulo="B3 Tracker", acoes=acoes)
 if __name__ == "__main__":
    app.run(debug=True)

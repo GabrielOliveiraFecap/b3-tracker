@@ -14,11 +14,13 @@
         <h3 class = "painel">Painel de acompanhamento de ações da B3.</h3>
 
         <div class="grid-acoes">
+            {% for acao in acoes %}
             <article class="card">
-                <h2>PETR4</h2>
-                <p class="preco">R$ 38,50</p>
-                <p class="variacao positiva">+1,20%</p>
+                <h2>{{ acao.ticker }}</h2>
+                <p class="preco">R$ {{ acao.preco }}</p>
+                <p class="variacao {{ 'positiva' if acao.variacao >= 0 else 'negativa' }}">{{ acao.variacao }}%</p>
             </article>
+            {% endfor %}
 
             <article class="card">
                 <h2>ITSA3</h2>
@@ -47,24 +49,6 @@
             <article class="card">
                 <h2>açao</h2>
                 <p class="preco">R400,00</p>
-                <p class="variacao positiva">+1,20%</p>
-            </article>
-
-            <article class="card">
-                <h2>açao</h2>
-                <p class="preco">R500,00</p>
-                <p class="variacao positiva">+1,20%</p>
-            </article>
-
-            <article class="card">
-                <h2>açao</h2>
-                <p class="preco">R600,00</p>
-                <p class="variacao positiva">+1,20%</p>
-            </article>
-
-            <article class="card">
-                <h2>açao</h2>
-                <p class="preco">R700,00</p>
                 <p class="variacao positiva">+1,20%</p>
             </article>
         </div>
