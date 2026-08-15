@@ -26,7 +26,6 @@ body {
 }
 .grid-acoes {
     display: grid;
-    justify-content: space-around;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 30px;
